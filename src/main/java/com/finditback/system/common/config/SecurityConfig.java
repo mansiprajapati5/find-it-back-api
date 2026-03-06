@@ -40,6 +40,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/auth/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/users/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/auth/users/verify-email/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/auth/users").hasRole("ADMIN")  // only admin can get all users
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/users/**").hasRole("ADMIN")  // only admin can delete
+                        .requestMatchers(HttpMethod.GET, "/api/auth/users/{id}").hasAnyRole("ADMIN", "USER")  // both can get by id
                         // everything else requires JWT
                         .anyRequest().authenticated()
                 )
