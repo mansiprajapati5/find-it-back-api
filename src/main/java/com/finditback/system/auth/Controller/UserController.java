@@ -9,6 +9,7 @@ import com.finditback.system.auth.Model.User;
 import com.finditback.system.auth.service.EmailVerificationService;
 import com.finditback.system.auth.service.UserService;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -64,5 +66,9 @@ public class UserController {
     public ResponseEntity<Map<String, String>> verifyEmail(@RequestParam String token) {
         emailVerificationService.verifyEmail(token);
         return ResponseEntity.ok(Map.of("message", "Email verified successfully"));
+    }
+    @GetMapping("/oauth2/google")
+    public void googleLogin(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/oauth2/authorization/google");
     }
 }

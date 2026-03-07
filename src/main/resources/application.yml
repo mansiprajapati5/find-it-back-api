@@ -29,6 +29,19 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
 
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 856767156589-urbcsa27rt9e486ubqsv2bm4kfg355ej.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - openid
+              - profile
+              - email
+
   # OAuth2 (commented for now)
 #  security:
 #    oauth2:
